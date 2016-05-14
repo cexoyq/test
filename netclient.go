@@ -1,3 +1,4 @@
+/*WEBSOCKET客户端，循环接收通道，定时器，接收并处理系统信号*/
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
