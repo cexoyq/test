@@ -1,26 +1,36 @@
-/*使用flag取得命令行标志类参数的值
+/*使用flag取得命令行标志类参数的值，注意用flag.int,flag.bool等得到的是变量的地址，需要取值。
 最后一个参数是help信息：go run test.go --help，也可以用-help，-h, --h
+1.Bool值只需要参数就是True，当没有输入参数的时候可以设置默认值为false，可以用于-V作为版本显示之用。
+	如：# go run flag.go -v
+	2016/05/15 07:21:38 print verison!
+	exit status 100
+2.int值及String参数都需要值
 */
 package main
 
 import (
 	"flag"
-	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
 	ok := flag.Bool("ok", false, "is ok")
 	id := flag.Int("id", 0, "id")
 	port := flag.String("port", ":8080", "http listen port")
+	v := flag.Bool("v", false, "版本：v2.0")
 	var name string
 	flag.StringVar(&name, "name", "123", "name")
 
 	flag.Parse()
-
-	fmt.Println("ok:", *ok)
-	fmt.Println("id:", *id)
-	fmt.Println("port:", *port)
-	fmt.Println("name:", name)
+	if *v == true { //显示版本信息
+		log.Println("print verison!")
+		os.Exit(100)
+	}
+	log.Println("ok:", *ok)
+	log.Println("id:", *id)
+	log.Println("port:", *port)
+	log.Println("name:", name)
 }
 
 /*
